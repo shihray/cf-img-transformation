@@ -1,4 +1,4 @@
-package cf_pan_avatar_transformation
+package transform
 
 import "time"
 

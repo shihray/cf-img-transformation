@@ -1,14 +1,15 @@
-package cf_pan_avatar_transformation
+package transform
 
 import (
-	"cloud.google.com/go/storage"
 	"context"
 	"fmt"
-	log "github.com/sirupsen/logrus"
 	"image"
 	"image/jpeg"
 	"image/png"
 	"strings"
+
+	"cloud.google.com/go/storage"
+	log "github.com/sirupsen/logrus"
 
 	"github.com/nfnt/resize"
 )
@@ -16,6 +17,12 @@ import (
 const ResizePath = "resize"
 
 func ResizeAvatar(ctx context.Context, s *storage.Client, e GCSEvent) (err error) {
+
+	outputName := convertToResizePath(e.Name)
+	if outputName == "" {
+		return nil
+	}
+
 	inputBlob := s.Bucket(e.Bucket).Object(e.Name)
 	r, err := inputBlob.NewReader(ctx)
 	if err != nil {
@@ -23,10 +30,6 @@ func ResizeAvatar(ctx context.Context, s *storage.Client, e GCSEvent) (err error
 		return err
 	}
 
-	outputName := convertToResizePath(e.Name)
-	if outputName == "" {
-		return nil
-	}
 	outputBlob := s.Bucket(e.Bucket).Object(outputName)
 	w := outputBlob.NewWriter(ctx)
 	defer w.Close()
