@@ -1,1 +1,1 @@
-# cf-public-img-transformation
+# cf-img-transformation

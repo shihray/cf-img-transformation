@@ -1,4 +1,4 @@
-module github.com/lctech-tw/transformation
+module github.com/shihray/cf-img-transformation
 
 go 1.16
 
