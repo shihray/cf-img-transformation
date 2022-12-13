@@ -16,7 +16,7 @@ import (
 
 const ResizePath = "resize"
 
-func ResizeAvatar(ctx context.Context, s *storage.Client, e GCSEvent) (err error) {
+func ResizeImg(ctx context.Context, s *storage.Client, e GCSEvent) (err error) {
 
 	outputName := convertToResizePath(e.Name)
 	if outputName == "" {

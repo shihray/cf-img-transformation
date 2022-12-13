@@ -34,7 +34,7 @@ func Entry(ctx context.Context, e GCSEvent) (err error) {
 	log.Infof("SelfLink: %v\n", e.SelfLink)
 	log.Infof("ContentType: %v\n", e.ContentType)
 
-	err = ResizeAvatar(ctx, storageCli, e)
+	err = ResizeImg(ctx, storageCli, e)
 	if err != nil {
 		return err
 	}
